@@ -611,42 +611,44 @@ const App = () => {
   // Render Weeks List Page
   const renderWeeksPage = () => {
     return (
-      <div className="max-w-4xl mx-auto p-4 sm:p-6">
-        <div className="mb-6">
+      <div className="max-w-4xl mx-auto h-full flex flex-col">
+        <div className="p-4 sm:p-6 pb-4">
           <h2 className="text-2xl font-black text-slate-900 mb-2">Semanas do Programa</h2>
           <p className="text-slate-600 text-sm">Selecione uma semana para ver os detalhes</p>
         </div>
-        <div className="space-y-4">
-          {weekData.map((week, index) => (
-            <button
-              key={week.id}
-              onClick={() => {
-                setSelectedWeek(week.id);
-                setCurrentPage('week-details');
-              }}
-              className="w-full bg-white border rounded-2xl p-5 shadow-sm hover:shadow-md transition-all text-left"
-            >
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-1">{week.title}</h3>
-                  <p className="text-sm text-slate-600">{week.objective}</p>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="text-right">
-                    <div className="text-xs text-slate-500 mb-1">Progresso</div>
-                    <div className="text-sm font-bold text-slate-700">{calculateWeekProgress(week.id)}%</div>
+        <div className="flex-1 overflow-y-auto px-4 sm:px-6 pb-4">
+          <div className="space-y-4">
+            {weekData.map((week, index) => (
+              <button
+                key={week.id}
+                onClick={() => {
+                  setSelectedWeek(week.id);
+                  setCurrentPage('week-details');
+                }}
+                className="w-full bg-white border rounded-2xl p-5 shadow-sm hover:shadow-md transition-all text-left"
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-lg font-bold text-slate-900 mb-1">{week.title}</h3>
+                    <p className="text-sm text-slate-600">{week.objective}</p>
                   </div>
-                  <ChevronRight className="text-slate-400" size={20} />
+                  <div className="flex items-center gap-3">
+                    <div className="text-right">
+                      <div className="text-xs text-slate-500 mb-1">Progresso</div>
+                      <div className="text-sm font-bold text-slate-700">{calculateWeekProgress(week.id)}%</div>
+                    </div>
+                    <ChevronRight className="text-slate-400" size={20} />
+                  </div>
                 </div>
-              </div>
-              <div className="mt-3 w-full bg-slate-200 rounded-full h-2 overflow-hidden">
-                <div 
-                  className="bg-green-500 h-full transition-all duration-300" 
-                  style={{ width: `${calculateWeekProgress(week.id)}%` }}
-                ></div>
-              </div>
-            </button>
-          ))}
+                <div className="mt-3 w-full bg-slate-200 rounded-full h-2 overflow-hidden">
+                  <div 
+                    className="bg-green-500 h-full transition-all duration-300" 
+                    style={{ width: `${calculateWeekProgress(week.id)}%` }}
+                  ></div>
+                </div>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     );
@@ -782,10 +784,13 @@ const App = () => {
     return (
       <div className="max-w-4xl mx-auto p-4 sm:p-6">
         <div className="bg-white rounded-2xl p-6 border shadow-sm">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-black flex items-center gap-2 text-slate-900">
-              TREINO FULLBODY <span className="text-sm font-normal text-slate-400">(Base)</span>
-            </h2>
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h2 className="text-2xl font-black flex items-center gap-2 text-slate-900">
+                TREINO FULLBODY <span className="text-sm font-normal text-slate-400">(Base)</span>
+              </h2>
+              <p className="text-sm text-slate-500 mt-1">Faça no conforto da sua casa!</p>
+            </div>
             <button
               onClick={() => setCurrentPage('home')}
               className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
@@ -795,7 +800,7 @@ const App = () => {
           </div>
           <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
             <p className="text-sm text-blue-800">
-              <span className="font-bold">Semana {activeWeek}:</span> {
+              <span className="font-bold">Todas as Semanas:</span> {
                 activeWeek === 1 ? "Séries base (3 séries)" :
                 activeWeek === 2 ? "15 repetições nos exercícios 1, 2, 3. Exercícios 4, 5 e 6 duram 1 minuto" :
                 activeWeek === 3 ? "4 séries para todos. Exercícios 4, 5 e 6 duram 1min 15s" :
